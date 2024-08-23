@@ -4,8 +4,8 @@ import requests
 from dotenv import load_dotenv
 from discord.ext import commands
 import json
-import pandas as pd
-from sqlalchemy.orm.sync import update
+import pprint
+
 
 load_dotenv()
 
@@ -31,23 +31,11 @@ async def get_bitcoin_price(ctx, currency):
     price = response_json['bpi'][currency]['rate']
     print(price)
     if currency == "USD":
-        with open('pricelist_usd.txt', 'w') as p:
-            p.write(price)
-        with open('pricelist_usd.txt', 'r') as f:
-            price_currency = f.read()
-        await ctx.channel.send(price_currency)
+        await ctx.channel.send(price)
     elif currency == "EUR":
-        with open('pricelist_eur.txt', 'w') as p:
-            p.write(price)
-        with open('pricelist_eur.txt', 'r') as f:
-            price_currency = f.read()
-        await ctx.channel.send(price_currency)
+        await ctx.channel.send(price)
     elif currency == "GBP":
-        with open('pricelist_gbp.txt', 'w') as p:
-            p.write(price)
-        with open('pricelist_gbp.txt', 'r') as f:
-            price_currency = f.read()
-        await ctx.channel.send(price_currency)
+        await ctx.channel.send(price)
     else:
         pass
 bot.run(TOKEN)
